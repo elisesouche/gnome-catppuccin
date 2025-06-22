@@ -4,7 +4,7 @@ This script edits the standard GNOME Shell stylesheets to apply the [[https://ca
 It generates a theme to be used with the [[https://extensions.gnome.org/extension/19/user-themes][User Themes]] extension.
 It DOES NOT install the generated theme in any way!
 
-* Catppuccin Flavor
+** Catppuccin Flavor
 
 Catppuccin has four flavors: a light theme (Latte) and three dark ones (Frappe, Macchiato, Mocha).
 *This scripts builds Mocha*, the darkest, because it is the one I use.
@@ -22,9 +22,14 @@ You will also have to make similar simple edits to [[colors.scss.patch]] and [[d
 Moreover, this script can be used to change the GNOME theme with any color palette. Again, just edit the three files mentionned above with the colors you wish.
 
 
-* Usage
+** Usage
 
-** Generating the theme
+*** Dependencies
+
+You need Python (I use 3.13) with the libraries =libsass= and =diff_match_patch=.
+If you are on Nix, a [[shell.nix]] is provided.
+
+*** Generating the theme
 
 Clone this repository:
 #+begin_src shell
@@ -39,7 +44,7 @@ Build:
 
 The theme is built in =./_build/theme=.
 
-** Installing the theme
+*** Installing the theme
 
 The theme is located at =./_build/theme=.
 You can simply copy its content or symlink it to =~/.themes/gnome-catppuccin= (or some other name).
