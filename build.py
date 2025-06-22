@@ -25,7 +25,10 @@ def mk_all_patches():
     mk_patch("default-colors")
 
 def clean():
-    shutil.rmtree(f"{BUILD_PATH}")
+    try:
+        shutil.rmtree(f"{BUILD_PATH}")
+    except:
+        pass
 
 def mk_theme_dir():
     print("Creating output build directory...")
