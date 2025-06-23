@@ -2,7 +2,8 @@
 
 This script edits the standard GNOME Shell stylesheets to apply the [[https://catppuccin.com][Catppuccin]] colorscheme.
 It generates a theme to be used with the [[https://extensions.gnome.org/extension/19/user-themes][User Themes]] extension.
-It DOES NOT install the generated theme in any way!
+
+The theme is packaged for Nix (see [[default.nix]]). If you use NixOS or home-manager, you should be able to install it like any other GNOME theme.
 
 ** Catppuccin Flavor
 
@@ -22,7 +23,29 @@ You will also have to make similar simple edits to [[colors.scss.patch]] and [[d
 Moreover, this script can be used to change the GNOME theme with any color palette. Again, just edit the three files mentionned above with the colors you wish.
 
 
-** Usage
+** For Nix users
+
+For NixOS/home-manager users: add something like this to an overlay
+#+begin_src nix
+gnome-catppuccin =
+  let
+    src = pkgs.fetchFromGitHub {
+      owner = "elisesouche";
+      repo = "gnome-catppuccin";
+      rev = "v1.0";
+      hash = "sha256-R/pIVO8I3d5cAhgGSHthOpjHEo1Oxbaepb30raxWRnc=";
+      fetchSubmodules = true;
+    };
+  in pkgs.callPackage "${src}" {};
+#+end_src
+
+and then simply add
+#+begin_src
+home.packages = [ pkgs.gnome-catppuccin ];
+#+end_src
+to a home-manager module. The User Themes extension can then be used to apply the theme.
+
+** Usage for non-Nix users
 
 *** Dependencies
 
@@ -45,6 +68,7 @@ Build:
 The theme is built in =./_build/theme=.
 
 *** Installing the theme
+
 
 The theme is located at =./_build/theme=.
 You can simply copy its content or symlink it to =~/.themes/gnome-catppuccin= (or some other name).
